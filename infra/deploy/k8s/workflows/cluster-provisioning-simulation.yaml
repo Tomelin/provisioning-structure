@@ -92,7 +92,7 @@ spec:
 
     - name: http-request-external
       http:
-        url: "https://ifconfig.co/json"
+        url: "http://ifconfig.co/json"
         method: "GET"
         headers:
           - name: "Content-Type"
