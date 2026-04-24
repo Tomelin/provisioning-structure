@@ -16,22 +16,28 @@ spec:
                 - name: message
                   value: "Check there are IPs in subnets to migrate cluster blue/green"
 
-          - name: step2-generate-nameid
+          - name: check-others-steps
             template: echo-step
             arguments:
               parameters:
                 - name: message
-                  value: "2/3. Copio todas as configurações do cluster base e gero um proximo
-                    NameID"
+                  value: "Check others steps"
 
-        # Etapa 4: Provisionar Tests
         - - name: step3-provision-tests
             template: echo-step
             arguments:
               parameters:
                 - name: message
                   value: "4. Faço o provisionamento do Cluster de Tests"
-
+        - - name: http-request-example
+            http:
+              url: "https://example.com"
+              method: "POST"
+              headers:
+                - name: "Content-Type"
+                  value: "application/json"
+              body: "{\"key\": \"value\"}"
+              timeoutSeconds: 30
         # Etapa 5: Espera e Staging
         - - name: step4-wait-and-staging
             template: echo-step
