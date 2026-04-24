@@ -86,7 +86,7 @@ spec:
 
     - name: http-request-template
       http:
-        url: "http://192.168.0.144:8080/workflows"
+        url: "http://172.18.0.1:8080/workflows"
         method: "GET"
         headers:
           - name: "Content-Type"
