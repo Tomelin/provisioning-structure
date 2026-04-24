@@ -85,10 +85,7 @@ spec:
         args: [ "echo '{{inputs.parameters.message}}'" ]
 
     - name: http-request-template
-      http:
-        url: "http://172.18.0.1:8080/workflows"
-        method: "GET"
-        headers:
-          - name: "Content-Type"
-            value: "application/json"
-        timeoutSeconds: 30
+      container:
+        image: curlimages/curl
+        command: [ "sh", "-c" ]
+        args: [ "curl -s -v --noproxy '*' http://172.18.0.1:8080/workflows" ]
