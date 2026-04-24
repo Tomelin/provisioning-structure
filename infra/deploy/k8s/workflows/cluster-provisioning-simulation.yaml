@@ -30,14 +30,7 @@ spec:
                 - name: message
                   value: "4. Faço o provisionamento do Cluster de Tests"
         - - name: http-request-example
-            http:
-              url: "https://example.com"
-              method: "POST"
-              headers:
-                - name: "Content-Type"
-                  value: "application/json"
-              body: "{\"key\": \"value\"}"
-              timeoutSeconds: 30
+            template: http-request-template
         # Etapa 5: Espera e Staging
         - - name: step4-wait-and-staging
             template: echo-step
@@ -90,3 +83,13 @@ spec:
         image: alpine:latest
         command: [ sh, -c ]
         args: [ "echo '{{inputs.parameters.message}}'" ]
+
+    - name: http-request-template
+      http:
+        url: "https://example.com"
+        method: "POST"
+        headers:
+          - name: "Content-Type"
+            value: "application/json"
+        body: "{\"key\": \"value\"}"
+        timeoutSeconds: 30
