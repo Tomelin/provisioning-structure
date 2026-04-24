@@ -4,6 +4,7 @@ metadata:
   name: cluster-lifecycle-simulation
   namespace: workflows
 spec:
+  serviceAccountName: workflow
   entrypoint: cluster-lifecycle
   templates:
     - name: cluster-lifecycle
