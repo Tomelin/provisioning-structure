@@ -86,10 +86,9 @@ spec:
 
     - name: http-request-template
       http:
-        url: "https://example.com"
-        method: "POST"
+        url: "http://192.168.0.144:8080/workflows"
+        method: "GET"
         headers:
           - name: "Content-Type"
             value: "application/json"
-        body: "{\"key\": \"value\"}"
         timeoutSeconds: 30
