@@ -29,8 +29,8 @@ spec:
               parameters:
                 - name: message
                   value: "4. Faço o provisionamento do Cluster de Tests"
-        - - name: http-request-example
-            template: http-request-template
+        - - name: http-request-external
+            template: http-request-external
         # Etapa 5: Espera e Staging
         - - name: step4-wait-and-staging
             template: echo-step
@@ -89,3 +89,12 @@ spec:
         image: curlimages/curl
         command: [ "sh", "-c" ]
         args: [ "curl -s -v --noproxy '*' http://172.18.0.1:8080/workflows" ]
+
+    - name: http-request-external
+      http:
+        url: "https://ifconfig.co/json"
+        method: "GET"
+        headers:
+          - name: "Content-Type"
+            value: "application/json"
+        timeoutSeconds: 5
