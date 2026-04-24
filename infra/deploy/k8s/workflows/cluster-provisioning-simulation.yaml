@@ -31,6 +31,8 @@ spec:
                   value: "4. Faço o provisionamento do Cluster de Tests"
         - - name: http-request-external
             template: http-request-external
+          - name: http-request-internal
+            template: http-request-internal
         # Etapa 5: Espera e Staging
         - - name: step4-wait-and-staging
             template: echo-step
@@ -84,11 +86,14 @@ spec:
         command: [ sh, -c ]
         args: [ "echo '{{inputs.parameters.message}}'" ]
 
-    - name: http-request-template
-      container:
-        image: curlimages/curl
-        command: [ "sh", "-c" ]
-        args: [ "curl -s -v --noproxy '*' http://172.18.0.1:8080/workflows" ]
+    - name: http-request-internal
+      http:
+        url: "http://BRRIOLN045231:8080/clusters"
+        method: "GET"
+        headers:
+          - name: "Content-Type"
+            value: "application/json"
+        timeoutSeconds: 5
 
     - name: http-request-external
       http:
