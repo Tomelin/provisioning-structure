@@ -9,69 +9,72 @@ spec:
   templates:
     - name: cluster-lifecycle
       steps:
-        # Etapa 1 e 2: Coletar e Iniciar
-        - - name: step1-collect-info
+        - - name: check-subnets-available
             template: echo-step
             arguments:
               parameters:
-              - name: message
-                value: "1. Coleto o Cloud Provider e pego o primeiro Environment (tests)"
-        
-        # Etapa 3: Gerar ID e Copiar Config
-        - - name: step2-generate-nameid
+                - name: message
+                  value: "Check there are IPs in subnets to migrate cluster blue/green"
+
+          - name: step2-generate-nameid
             template: echo-step
             arguments:
               parameters:
-              - name: message
-                value: "2/3. Copio todas as configurações do cluster base e gero um proximo NameID"
-        
+                - name: message
+                  value: "2/3. Copio todas as configurações do cluster base e gero um proximo
+                    NameID"
+
         # Etapa 4: Provisionar Tests
         - - name: step3-provision-tests
             template: echo-step
             arguments:
               parameters:
-              - name: message
-                value: "4. Faço o provisionamento do Cluster de Tests"
+                - name: message
+                  value: "4. Faço o provisionamento do Cluster de Tests"
 
         # Etapa 5: Espera e Staging
         - - name: step4-wait-and-staging
             template: echo-step
             arguments:
               parameters:
-              - name: message
-                value: "5. Status Active (7 dias) -> inicio automacao para o ambiente Staging. Gero NameIDs e provisiono Staging."
+                - name: message
+                  value: "5. Status Active (7 dias) -> inicio automacao para o ambiente Staging.
+                    Gero NameIDs e provisiono Staging."
 
         # Etapa 5.4: Espera e Sandbox
         - - name: step5-wait-and-sandbox
             template: echo-step
             arguments:
               parameters:
-              - name: message
-                value: "5.4 Status Active Staging (7 dias) -> inicio automacao para o ambiente Sandbox."
+                - name: message
+                  value: "5.4 Status Active Staging (7 dias) -> inicio automacao para o ambiente
+                    Sandbox."
 
         # Etapa 6: Drain do Cluster Antigo
         - - name: step6-drain-old-cluster
             template: echo-step
             arguments:
               parameters:
-              - name: message
-                value: "6. Habilito o cluster antigo como Draining, para não receber mais aplicações"
+                - name: message
+                  value: "6. Habilito o cluster antigo como Draining, para não receber mais
+                    aplicações"
 
         # Etapa 7: Migração de Aplicações
         - - name: step7-migrate-applications
             template: echo-step
             arguments:
               parameters:
-              - name: message
-                value: "7. Migro as aplicações do cluster antigo para o novo"
+                - name: message
+                  value: "7. Migro as aplicações do cluster antigo para o novo"
 
         # Etapa 8: Remoção
         - - name: step8-remove-old-cluster
             template: echo-step
             arguments:
               parameters:
-              - name: message
-                value: "8. Após migrar todas as aplicações, inicio o processo de remoção do cluster antigo"
+                - name: message
+                  value: "8. Após migrar todas as aplicações, inicio o processo de remoção do
+                    cluster antigo"
 
     - name: echo-step
       inputs:
@@ -79,5 +82,5 @@ spec:
           - name: message
       container:
         image: alpine:latest
-        command: [sh, -c]
-        args: ["echo '{{inputs.parameters.message}}'"]
+        command: [ sh, -c ]
+        args: [ "echo '{{inputs.parameters.message}}'" ]
