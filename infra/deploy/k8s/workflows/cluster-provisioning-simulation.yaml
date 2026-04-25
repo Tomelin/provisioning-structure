@@ -88,7 +88,7 @@ spec:
 
     - name: http-request-internal
       http:
-        url: "http://BRRIOLN045231:8080/clusters"
+        url: "http://backend.default.svc.cluster.local:8080/clusters"
         method: "GET"
         headers:
           - name: "Content-Type"
